@@ -1,0 +1,62 @@
+
+ .funds {
+   padding: 15px;
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+}
+
+ .funds .btn {
+   width: 100%;
+   max-width: 200px; 
+ }
+
+ .row {
+  flex-wrap: wrap; 
+   margin: 0 -10px; 
+ }
+ .col {
+   flex: 1 1 100%; 
+  padding: 10px;
+  box-sizing: border-box;
+ }
+
+ @media (min-width: 768px) {
+ .funds {
+    flex-direction: row;
+     align-items: center;
+    gap: 20px;
+  }
+  .funds .btn {
+    width: auto;
+  }
+  .col {
+  flex: 1 1 48%;
+   } }
+
+ @media (min-width: 1024px) {
+   .col {
+     flex: 1 1 32%;
+   }
+ }
+
+.table .data {
+   display: flex;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+ }
+
+ .table .data:last-child {
+   border-bottom: none;
+}
+
+.commodity {
+   padding: 20px;
+   border: 1px solid #ddd;
+  border-radius: 5px;
+ text-align: center;
+ }
+
+.commodity .btn {
+  margin-top: 15px;
+}
