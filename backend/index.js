@@ -6,6 +6,8 @@ const cors = require("cors");
 const session = require("express-session");
 const flash = require("connect-flash");
 const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
+const bcrypt = require("bcrypt");
 const bodyParser = require("body-parser");
 
 const authRoutes = require("./routes/authRoutes");
@@ -19,6 +21,8 @@ mongoose.connect(process.env.MONO_URL)
   .then(() => console.log("DB Connected"))
   .catch(err => console.error("DB connection error:", err));
 
+app.set("trust proxy", 1);
+
 app.use(cors({
   origin: [process.env.VITE_FRONTEND_URL, process.env.VITE_DASHBOARD_URL],
   credentials: true,
@@ -29,9 +33,16 @@ app.use(express.json());
 app.use(bodyParser.json());
 
 app.use(session({
+  name: "session.id",
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
+  cookie: {
+    secure: true,           
+    sameSite: "None",       
+    httpOnly: true,
+    maxAge: 24 * 60 * 60 * 1000, 
+  },
 }));
 
 app.use(flash());
@@ -40,6 +51,7 @@ app.use(passport.session());
 passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
 
 app.use("/", (req, res, next) => {
   res.locals.success = req.flash("success");

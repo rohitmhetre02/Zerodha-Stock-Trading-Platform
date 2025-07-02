@@ -36,7 +36,7 @@ const BuyActionWindow = ({ uid }) => {
 
     try {
       const res = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/newOrder`,
+        `${import.meta.env.VITE_BACKEND_URL}/orders/newOrder`,
         {
           name: uid,
           qty: Number(stockQuantity),

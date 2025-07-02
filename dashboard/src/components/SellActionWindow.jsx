@@ -28,7 +28,7 @@ const SellActionWindow = ({ uid }) => {
   const handleSellClick = async () => {
     try {
       const res = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/allHoldings/newOrder`,
+        `${import.meta.env.VITE_BACKEND_URL}/orders/newOrder`,
         {
           name: uid,
           qty: stockQuantity,
